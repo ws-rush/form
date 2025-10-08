@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { FormDevtoolsPlugin } from '@tanstack/react-form-devtools'
 import { useForm } from '@tanstack/react-form'
+import { useStore } from '@tanstack/react-store'
 
 import type { AnyFieldApi } from '@tanstack/react-form'
 
@@ -20,15 +21,24 @@ function FieldInfo({ field }: { field: AnyFieldApi }) {
 
 export default function App() {
   const form = useForm({
-    defaultValues: {
-      firstName: '',
-      lastName: '',
+    defaultValues: async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      return {
+        firstName: 'Jules',
+        lastName: 'The Engineer',
+      }
     },
     onSubmit: async ({ value }) => {
       // Do something with form data
       console.log(value)
     },
   })
+
+  const isLoading = useStore(form.store, (s) => s.isLoading)
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
 
   return (
     <div>

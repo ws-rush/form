@@ -366,7 +366,7 @@ export interface BaseFormOptions<in out TFormData, in out TSubmitMeta = never> {
   /**
    * Set initial values for your form.
    */
-  defaultValues?: TFormData
+  defaultValues?: TFormData | (() => TFormData | Promise<TFormData>)
   /**
    * onSubmitMeta, the data passed from the handleSubmit handler, to the onSubmit function props
    */
@@ -661,6 +661,10 @@ export type BaseFormState<
    * @private, used to force a re-evaluation of the form state when options change
    */
   _force_re_eval?: boolean
+  /**
+   * A boolean indicating if the form is currently loading its default values.
+   */
+  isLoading: boolean
 }
 
 export type DerivedFormState<
@@ -844,6 +848,7 @@ function getDefaultFormState<
     isValidating: defaultState.isValidating ?? false,
     submissionAttempts: defaultState.submissionAttempts ?? 0,
     isSubmitSuccessful: defaultState.isSubmitSuccessful ?? false,
+    isLoading: defaultState.isLoading ?? false,
     validationMetaMap: defaultState.validationMetaMap ?? {
       onChange: undefined,
       onBlur: undefined,
@@ -1002,16 +1007,46 @@ export class FormApi<
     }
 
     this._formId = opts?.formId ?? uuid()
-
     this._devtoolsSubmissionOverride = false
+
+    const defaultValues = opts?.defaultValues
+    let values: TFormData | undefined
+    let isLoading = false
+    let promise: Promise<TFormData> | undefined
+
+    if (typeof defaultValues === 'function') {
+      const res = (defaultValues as () => TFormData | Promise<TFormData>)()
+
+      if (res instanceof Promise) {
+        isLoading = true
+        promise = res
+      } else {
+        values = res
+      }
+    } else {
+      values = defaultValues as TFormData
+    }
 
     this.baseStore = new Store(
       getDefaultFormState({
         ...(opts?.defaultState as any),
-        values: opts?.defaultValues ?? opts?.defaultState?.values,
+        values: values ?? opts?.defaultState?.values,
+        isLoading,
         isFormValid: true,
       }),
     )
+
+    if (promise) {
+      promise.then((resolvedValues) => {
+        batch(() => {
+          this.baseStore.setState((prev) => ({
+            ...prev,
+            values: resolvedValues,
+            isLoading: false,
+          }))
+        })
+      })
+    }
 
     this.fieldMetaDerived = new Derived({
       deps: [this.baseStore],
@@ -1475,16 +1510,44 @@ export class FormApi<
       }
     }
 
+    const defaultValues = values ?? this.options.defaultValues
+    let newValues: TFormData | undefined
+    let isLoading = false
+    let promise: Promise<TFormData> | undefined
+
+    if (typeof defaultValues === 'function') {
+      const res = (defaultValues as () => TFormData | Promise<TFormData>)()
+
+      if (res instanceof Promise) {
+        isLoading = true
+        promise = res
+      } else {
+        newValues = res
+      }
+    } else {
+      newValues = defaultValues as TFormData
+    }
+
     this.baseStore.setState(() =>
       getDefaultFormState({
         ...(this.options.defaultState as any),
-        values:
-          values ??
-          this.options.defaultValues ??
-          this.options.defaultState?.values,
+        values: newValues ?? this.options.defaultState?.values,
         fieldMetaBase,
+        isLoading,
       }),
     )
+
+    if (promise) {
+      promise.then((resolvedValues) => {
+        batch(() => {
+          this.baseStore.setState((prev) => ({
+            ...prev,
+            values: resolvedValues,
+            isLoading: false,
+          }))
+        })
+      })
+    }
   }
 
   /**

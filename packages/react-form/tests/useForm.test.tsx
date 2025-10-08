@@ -958,4 +958,65 @@ describe('useForm', () => {
     await user.type(input, 'a')
     await user.click(removeButton)
   })
+
+  it('should handle async default values', async () => {
+    function Comp() {
+      const form = useForm({
+        defaultValues: async () => {
+          await sleep(10)
+          return {
+            firstName: 'Jules',
+            lastName: 'The Engineer',
+          }
+        },
+      })
+
+      const isLoading = useStore(form.store, (s) => s.isLoading)
+
+      if (isLoading) {
+        return <div>Loading...</div>
+      }
+
+      return (
+        <>
+          <form.Field
+            name="firstName"
+            children={(field) => {
+              return (
+                <input
+                  data-testid="firstName"
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
+              )
+            }}
+          />
+          <form.Field
+            name="lastName"
+            children={(field) => {
+              return (
+                <input
+                  data-testid="lastName"
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
+              )
+            }}
+          />
+        </>
+      )
+    }
+
+    const { getByText, findByTestId } = render(<Comp />)
+
+    expect(getByText('Loading...')).toBeInTheDocument()
+
+    const firstNameInput = await findByTestId('firstName')
+    expect(firstNameInput).toHaveValue('Jules')
+
+    const lastNameInput = await findByTestId('lastName')
+    expect(lastNameInput).toHaveValue('The Engineer')
+  })
 })
