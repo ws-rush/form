@@ -1,6 +1,6 @@
 import { FormApi, functionalUpdate } from '@tanstack/form-core'
 import { useStore } from '@tanstack/react-store'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Field } from './useField'
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect'
 import type {
@@ -182,7 +182,24 @@ export function useForm<
     TSubmitMeta
   >,
 ) {
-  const [formApi] = useState(() => {
+  const formApiRef = useRef<
+    ReactFormExtendedApi<
+      TFormData,
+      TOnMount,
+      TOnChange,
+      TOnChangeAsync,
+      TOnBlur,
+      TOnBlurAsync,
+      TOnSubmit,
+      TOnSubmitAsync,
+      TOnDynamic,
+      TOnDynamicAsync,
+      TOnServer,
+      TSubmitMeta
+    >
+  >(undefined)
+
+  if (!formApiRef.current) {
     const api = new FormApi<
       TFormData,
       TOnMount,
@@ -227,10 +244,12 @@ export function useForm<
       )
     }
 
-    return extendedApi
-  })
+    formApiRef.current = extendedApi
+  }
 
-  useIsomorphicLayoutEffect(formApi.mount, [])
+  const formApi = formApiRef.current
+
+  useIsomorphicLayoutEffect(formApi.mount, [formApi])
 
   /**
    * formApi.update should not have any side effects. Think of it like a `useRef`
@@ -238,7 +257,7 @@ export function useForm<
    */
   useIsomorphicLayoutEffect(() => {
     formApi.update(opts)
-  })
+  }, [formApi, opts])
 
   return formApi
 }

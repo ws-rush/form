@@ -1019,4 +1019,72 @@ describe('useForm', () => {
     const lastNameInput = await findByTestId('lastName')
     expect(lastNameInput).toHaveValue('The Engineer')
   })
+
+  it('should only call async default values once', async () => {
+    const spy = vi.fn()
+
+    function Comp() {
+      const [count, setCount] = useState(0)
+      const form = useForm({
+        defaultValues: async () => {
+          spy()
+          await sleep(10)
+          return {
+            firstName: 'Jules',
+            lastName: 'The Engineer',
+          }
+        },
+      })
+
+      const isLoading = useStore(form.store, (s) => s.isLoading)
+
+      if (isLoading) {
+        return <div onClick={() => setCount(count + 1)}>Loading...</div>
+      }
+
+      return (
+        <>
+          <form.Field
+            name="firstName"
+            children={(field) => {
+              return (
+                <input
+                  data-testid="firstName"
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
+              )
+            }}
+          />
+          <form.Field
+            name="lastName"
+            children={(field) => {
+              return (
+                <input
+                  data-testid="lastName"
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
+              )
+            }}
+          />
+        </>
+      )
+    }
+
+    const { getByText, findByTestId } = render(<Comp />)
+
+    expect(getByText('Loading...')).toBeInTheDocument()
+    await user.click(getByText('Loading...'))
+
+    const firstNameInput = await findByTestId('firstName')
+    expect(firstNameInput).toHaveValue('Jules')
+
+    const lastNameInput = await findByTestId('lastName')
+    expect(lastNameInput).toHaveValue('The Engineer')
+
+    expect(spy).toHaveBeenCalledTimes(1)
+  })
 })

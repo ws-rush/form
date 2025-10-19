@@ -1,11 +1,5 @@
 # @tanstack/form-core
 
-## 1.24.3
-
-### Patch Changes
-
-- respect dontValidate option in formApi array modifiers ([#1775](https://github.com/TanStack/form/pull/1775))
-
 ## 1.24.2
 
 ### Patch Changes
