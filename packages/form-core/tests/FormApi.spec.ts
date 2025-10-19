@@ -1013,32 +1013,40 @@ describe('form api', () => {
       defaultValues,
     })
     form.mount()
+
+    const assertDefaultValues = () => {
+      const currentDefaultValues = form.options.defaultValues
+      if (typeof currentDefaultValues !== 'function') {
+        expect(currentDefaultValues?.names).toStrictEqual(defaultValues.names)
+      }
+    }
+
     form.pushFieldValue('names', 'four')
-    expect(form.options.defaultValues?.names).toStrictEqual(defaultValues.names)
+    assertDefaultValues()
 
     form.reset()
     form.insertFieldValue('names', 0, 'other')
-    expect(form.options.defaultValues?.names).toStrictEqual(defaultValues.names)
+    assertDefaultValues()
 
     form.reset()
     form.replaceFieldValue('names', 1, 'other')
-    expect(form.options.defaultValues?.names).toStrictEqual(defaultValues.names)
+    assertDefaultValues()
 
     form.reset()
     form.removeFieldValue('names', 1)
-    expect(form.options.defaultValues?.names).toStrictEqual(defaultValues.names)
+    assertDefaultValues()
 
     form.reset()
     form.swapFieldValues('names', 1, 2)
-    expect(form.options.defaultValues?.names).toStrictEqual(defaultValues.names)
+    assertDefaultValues()
 
     form.reset()
     form.moveFieldValues('names', 1, 2)
-    expect(form.options.defaultValues?.names).toStrictEqual(defaultValues.names)
+    assertDefaultValues()
 
     form.reset()
     form.clearFieldValues('names')
-    expect(form.options.defaultValues?.names).toStrictEqual(defaultValues.names)
+    assertDefaultValues()
   })
 
   it('should handle fields inside an array', async () => {
