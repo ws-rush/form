@@ -691,9 +691,6 @@ importers:
       '@tanstack/react-form-devtools':
         specifier: ^0.1.6
         version: link:../../../packages/react-form-devtools
-      '@tanstack/react-store':
-        specifier: ^0.7.7
-        version: 0.7.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react:
         specifier: ^19.0.0
         version: 19.1.0

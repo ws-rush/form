@@ -3,8 +3,7 @@ import { createRoot } from 'react-dom/client'
 
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { FormDevtoolsPlugin } from '@tanstack/react-form-devtools'
-import { useForm } from '@tanstack/react-form'
-import { useStore } from '@tanstack/react-store'
+import { useForm, useStore } from '@tanstack/react-form'
 
 import type { AnyFieldApi } from '@tanstack/react-form'
 
@@ -23,6 +22,7 @@ export default function App() {
   const form = useForm({
     defaultValues: async () => {
       await new Promise((resolve) => setTimeout(resolve, 1000))
+      console.log('hello world')
       return {
         firstName: 'Jules',
         lastName: 'The Engineer',
