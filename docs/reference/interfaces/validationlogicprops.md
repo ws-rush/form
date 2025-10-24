@@ -7,7 +7,7 @@ title: ValidationLogicProps
 
 # Interface: ValidationLogicProps
 
-Defined in: [packages/form-core/src/ValidationLogic.ts:20](https://github.com/TanStack/form/blob/main/packages/form-core/src/ValidationLogic.ts#L20)
+Defined in: [packages/form-core/src/ValidationLogic.ts:20](https://github.com/ws-rush/form/blob/main/packages/form-core/src/ValidationLogic.ts#L20)
 
 ## Properties
 
@@ -17,7 +17,7 @@ Defined in: [packages/form-core/src/ValidationLogic.ts:20](https://github.com/Ta
 event: object;
 ```
 
-Defined in: [packages/form-core/src/ValidationLogic.ts:28](https://github.com/TanStack/form/blob/main/packages/form-core/src/ValidationLogic.ts#L28)
+Defined in: [packages/form-core/src/ValidationLogic.ts:28](https://github.com/ws-rush/form/blob/main/packages/form-core/src/ValidationLogic.ts#L28)
 
 #### async
 
@@ -45,7 +45,7 @@ type: "change" | "blur" | "submit" | "mount" | "server";
 form: AnyFormApi;
 ```
 
-Defined in: [packages/form-core/src/ValidationLogic.ts:22](https://github.com/TanStack/form/blob/main/packages/form-core/src/ValidationLogic.ts#L22)
+Defined in: [packages/form-core/src/ValidationLogic.ts:22](https://github.com/ws-rush/form/blob/main/packages/form-core/src/ValidationLogic.ts#L22)
 
 ***
 
@@ -55,7 +55,7 @@ Defined in: [packages/form-core/src/ValidationLogic.ts:22](https://github.com/Ta
 runValidation: (props) => void;
 ```
 
-Defined in: [packages/form-core/src/ValidationLogic.ts:33](https://github.com/TanStack/form/blob/main/packages/form-core/src/ValidationLogic.ts#L33)
+Defined in: [packages/form-core/src/ValidationLogic.ts:33](https://github.com/ws-rush/form/blob/main/packages/form-core/src/ValidationLogic.ts#L33)
 
 #### Parameters
 
@@ -84,4 +84,4 @@ validators:
 | FormValidators<any, any, any, any, any, any, any, any, any, any>;
 ```
 
-Defined in: [packages/form-core/src/ValidationLogic.ts:24](https://github.com/TanStack/form/blob/main/packages/form-core/src/ValidationLogic.ts#L24)
+Defined in: [packages/form-core/src/ValidationLogic.ts:24](https://github.com/ws-rush/form/blob/main/packages/form-core/src/ValidationLogic.ts#L24)

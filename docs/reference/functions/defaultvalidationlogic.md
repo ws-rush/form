@@ -11,7 +11,7 @@ title: defaultValidationLogic
 function defaultValidationLogic(props): void
 ```
 
-Defined in: [packages/form-core/src/ValidationLogic.ts:120](https://github.com/TanStack/form/blob/main/packages/form-core/src/ValidationLogic.ts#L120)
+Defined in: [packages/form-core/src/ValidationLogic.ts:120](https://github.com/ws-rush/form/blob/main/packages/form-core/src/ValidationLogic.ts#L120)
 
 ## Parameters
 

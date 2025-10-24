@@ -11,7 +11,7 @@ title: formOptions
 function formOptions<TOptions, TFormData, TOnMount, TOnChange, TOnChangeAsync, TOnBlur, TOnBlurAsync, TOnSubmit, TOnSubmitAsync, TOnDynamic, TOnDynamicAsync, TOnServer, TSubmitMeta>(defaultOpts): TOptions
 ```
 
-Defined in: [packages/form-core/src/formOptions.ts:23](https://github.com/TanStack/form/blob/main/packages/form-core/src/formOptions.ts#L23)
+Defined in: [packages/form-core/src/formOptions.ts:23](https://github.com/ws-rush/form/blob/main/packages/form-core/src/formOptions.ts#L23)
 
 ## Type Parameters
 

@@ -11,4 +11,4 @@ title: EventClientEventNames
 type EventClientEventNames = ExtractEventNames<EventClientEventMap>;
 ```
 
-Defined in: [packages/form-core/src/EventClient.ts:59](https://github.com/TanStack/form/blob/main/packages/form-core/src/EventClient.ts#L59)
+Defined in: [packages/form-core/src/EventClient.ts:59](https://github.com/ws-rush/form/blob/main/packages/form-core/src/EventClient.ts#L59)

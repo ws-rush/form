@@ -11,7 +11,7 @@ title: BroadcastFormState
 type BroadcastFormState = object;
 ```
 
-Defined in: [packages/form-core/src/EventClient.ts:9](https://github.com/TanStack/form/blob/main/packages/form-core/src/EventClient.ts#L9)
+Defined in: [packages/form-core/src/EventClient.ts:9](https://github.com/ws-rush/form/blob/main/packages/form-core/src/EventClient.ts#L9)
 
 ## Type declaration
 

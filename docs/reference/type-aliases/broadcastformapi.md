@@ -11,7 +11,7 @@ title: BroadcastFormApi
 type BroadcastFormApi = object;
 ```
 
-Defined in: [packages/form-core/src/EventClient.ts:14](https://github.com/TanStack/form/blob/main/packages/form-core/src/EventClient.ts#L14)
+Defined in: [packages/form-core/src/EventClient.ts:14](https://github.com/ws-rush/form/blob/main/packages/form-core/src/EventClient.ts#L14)
 
 ## Type declaration
 

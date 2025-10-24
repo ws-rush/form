@@ -11,7 +11,7 @@ title: BroadcastFormId
 type BroadcastFormId = object;
 ```
 
-Defined in: [packages/form-core/src/EventClient.ts:41](https://github.com/TanStack/form/blob/main/packages/form-core/src/EventClient.ts#L41)
+Defined in: [packages/form-core/src/EventClient.ts:41](https://github.com/ws-rush/form/blob/main/packages/form-core/src/EventClient.ts#L41)
 
 ## Type declaration
 

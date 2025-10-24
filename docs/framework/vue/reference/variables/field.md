@@ -11,7 +11,7 @@ title: Field
 const Field: <TParentData, TName, TData, TOnMount, TOnChange, TOnChangeAsync, TOnBlur, TOnBlurAsync, TOnSubmit, TOnSubmitAsync, TOnDynamic, TOnDynamicAsync, TFormOnMount, TFormOnChange, TFormOnChangeAsync, TFormOnBlur, TFormOnBlurAsync, TFormOnSubmit, TFormOnSubmitAsync, TFormOnDynamic, TFormOnDynamicAsync, TFormOnServer, TParentSubmitMeta>(props) => CreateComponentPublicInstanceWithMixins<UseFieldOptions<TParentData, TName, TData, TOnMount, TOnChange, TOnChangeAsync, TOnBlur, TOnBlurAsync, TOnSubmit, TOnSubmitAsync, TOnDynamic, TOnDynamicAsync, TFormOnMount, TFormOnChange, TFormOnChangeAsync, TFormOnBlur, TFormOnBlurAsync, TFormOnSubmit, TFormOnSubmitAsync, TFormOnDynamic, TFormOnDynamicAsync, TFormOnServer, TParentSubmitMeta> & {} | {}, {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, EmitsOptions, PublicProps, {}, false, {}, {}>;
 ```
 
-Defined in: [packages/vue-form/src/useField.tsx:510](https://github.com/TanStack/form/blob/main/packages/vue-form/src/useField.tsx#L510)
+Defined in: [packages/vue-form/src/useField.tsx:510](https://github.com/ws-rush/form/blob/main/packages/vue-form/src/useField.tsx#L510)
 
 ## Parameters
 

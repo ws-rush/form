@@ -7,7 +7,7 @@ title: CreateFieldOptionsBound
 
 # Interface: CreateFieldOptionsBound\<TParentData, TName, TData, TOnMount, TOnChange, TOnChangeAsync, TOnBlur, TOnBlurAsync, TOnSubmit, TOnSubmitAsync, TOnDynamic, TOnDynamicAsync\>
 
-Defined in: [packages/solid-form/src/types.ts:75](https://github.com/TanStack/form/blob/main/packages/solid-form/src/types.ts#L75)
+Defined in: [packages/solid-form/src/types.ts:75](https://github.com/ws-rush/form/blob/main/packages/solid-form/src/types.ts#L75)
 
 ## Extends
 
@@ -47,7 +47,7 @@ Defined in: [packages/solid-form/src/types.ts:75](https://github.com/TanStack/fo
 optional mode: "value" | "array";
 ```
 
-Defined in: [packages/solid-form/src/types.ts:13](https://github.com/TanStack/form/blob/main/packages/solid-form/src/types.ts#L13)
+Defined in: [packages/solid-form/src/types.ts:13](https://github.com/ws-rush/form/blob/main/packages/solid-form/src/types.ts#L13)
 
 #### Inherited from
 
