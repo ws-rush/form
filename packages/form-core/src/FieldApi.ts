@@ -1197,7 +1197,14 @@ export class FieldApi<
       },
     })
 
-    this.options = opts as never
+    const fieldListeners = this.form.options.fieldListeners?.[this.name]
+    const fieldValidators = this.form.options.fieldValidators?.[this.name]
+
+    this.options = {
+      ...opts,
+      listeners: { ...fieldListeners, ...opts.listeners },
+      validators: { ...fieldValidators, ...opts.validators },
+    } as never
   }
 
   /**

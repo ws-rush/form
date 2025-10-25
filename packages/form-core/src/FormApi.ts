@@ -33,6 +33,8 @@ import type {
   AnyFieldMeta,
   AnyFieldMetaBase,
   FieldApi,
+  FieldListeners,
+  FieldValidators,
 } from './FieldApi'
 import type {
   ExtractGlobalFormError,
@@ -263,6 +265,31 @@ export interface FormTransform<
     TOnServer,
     TSubmitMeta
   >
+
+  fieldListeners?: {
+    [TName in DeepKeys<TFormData>]?: FieldListeners<
+      TFormData,
+      TName,
+      DeepValue<TFormData, TName>
+    >
+  }
+
+  fieldValidators?: {
+    [TName in DeepKeys<TFormData>]?: FieldValidators<
+      TFormData,
+      TName,
+      DeepValue<TFormData, TName>,
+      any,
+      any,
+      any,
+      any,
+      any,
+      any,
+      any,
+      any,
+      any
+    >
+  }
   deps: unknown[]
 }
 

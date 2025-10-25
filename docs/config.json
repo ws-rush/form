@@ -127,6 +127,10 @@
               "to": "framework/react/guides/listeners"
             },
             {
+              "label": "Global Field Listeners and Validators",
+              "to": "framework/react/guides/global-field-listeners-and-validators"
+            },
+            {
               "label": "Custom Errors",
               "to": "framework/react/guides/custom-errors"
             },

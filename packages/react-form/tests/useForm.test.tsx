@@ -958,4 +958,60 @@ describe('useForm', () => {
     await user.type(input, 'a')
     await user.click(removeButton)
   })
+
+  it('should handle field validators and listeners', async () => {
+    const error = 'Please enter a different value'
+    const onChange = vi.fn()
+
+    function Comp() {
+      const form = useForm({
+        defaultValues: {
+          firstName: '',
+        },
+        fieldValidators: {
+          firstName: {
+            onChange: ({ value }) => (value === 'other' ? error : undefined),
+          },
+        },
+        fieldListeners: {
+          firstName: {
+            onChange: ({ value }) => {
+              onChange(value)
+            },
+          },
+        },
+      })
+      const errors = useStore(
+        form.store,
+        (s) => s.fieldMeta.firstName?.errorMap,
+      )
+      return (
+        <>
+          <form.Field
+            name="firstName"
+            defaultMeta={{ isTouched: true }}
+            children={(field) => (
+              <div>
+                <input
+                  data-testid="fieldinput"
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
+                <p>{errors?.onChange?.toString()}</p>
+              </div>
+            )}
+          />
+        </>
+      )
+    }
+
+    const { getByTestId, getByText, queryByText } = render(<Comp />)
+    const input = getByTestId('fieldinput')
+    expect(queryByText(error)).not.toBeInTheDocument()
+    await user.type(input, 'other')
+    expect(getByText(error)).toBeInTheDocument()
+    expect(onChange).toHaveBeenCalledWith('other')
+  })
 })
